@@ -12,6 +12,8 @@ repositories {
 }
 
 dependencies {
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation("org.postgresql:postgresql:42.7.7")
     implementation("io.ktor:ktor-server-core")
     implementation("io.ktor:ktor-server-netty")
     implementation("io.ktor:ktor-server-content-negotiation")
