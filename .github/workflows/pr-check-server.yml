@@ -19,7 +19,7 @@ jobs:
 
       - name: Lint
         shell: powershell
-        run: .\gradlew lint
+        run: .\gradlew ktlintCheck
 
       - name: Tests
         shell: powershell

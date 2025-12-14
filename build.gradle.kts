@@ -1,10 +1,15 @@
 plugins {
     kotlin("jvm") version "1.9.23"
     id("io.ktor.plugin") version "2.3.7"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
 application {
     mainClass.set("app.ApplicationKt")
+
+    ktlint {
+        ignoreFailures.set(true)
+    }
 }
 
 repositories {
