@@ -25,7 +25,7 @@ jobs:
       - name: Build Docker image
         shell: powershell
         run: |
-          docker build -t ktor-server:latest ./server
+          docker build -t ktor-server:latest .
 
       - name: Deploy server container
         shell: powershell
