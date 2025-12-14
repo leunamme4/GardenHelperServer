@@ -1,0 +1,33 @@
+name: Server Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, local, server]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build JAR
+        shell: powershell
+        run: .\gradlew build
+
+      - name: Build Docker image
+        shell: powershell
+        run: |
+          docker build -t ktor-server:latest ./server
+
+      - name: Deploy server container
+        shell: powershell
+        run: |
+          docker-compose -f C:\Users\overpower\IdeaProjects\docker-ktor-server\docker-compose.yml up -d server
