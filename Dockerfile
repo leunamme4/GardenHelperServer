@@ -9,7 +9,7 @@ COPY build.gradle.kts ./
 COPY settings.gradle.kts ./
 
 # Чиним права и окончания строк
-RUN chmod +x gradlew
+RUN sed -i 's/\r$//' gradlew && chmod +x gradlew
 
 # Прогрев зависимостей
 RUN ./gradlew --version
