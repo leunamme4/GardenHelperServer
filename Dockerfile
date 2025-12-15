@@ -28,7 +28,7 @@ WORKDIR /app
 # Копируем jar и wait-for-it
 COPY --from=build /app/build/libs/*-all.jar app.jar
 COPY wait-for-it.sh wait-for-it.sh
-RUN chmod +x wait-for-it.sh
+RUN sed -i 's/\r$//' wait-for-it.sh && chmod +x wait-for-it.sh
 
 EXPOSE 8080
 
