@@ -3,10 +3,10 @@ FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 
 # Копируем gradle wrapper и конфиги
-COPY gradlew .
-COPY gradle gradle
-COPY build.gradle.kts .
-COPY settings.gradle.kts .
+COPY gradlew ./
+COPY gradle ./gradle
+COPY build.gradle.kts ./
+COPY settings.gradle.kts ./
 
 # Чиним права и окончания строк
 RUN chmod +x gradlew
