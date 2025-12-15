@@ -22,6 +22,12 @@ jobs:
         shell: powershell
         run: .\gradlew build
 
+      - name: Debug files
+        run: |
+          pwd
+          ls
+          ls server
+
       - name: Build Docker image
         shell: powershell
         run: |
