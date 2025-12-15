@@ -25,4 +25,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-gson")
     testImplementation("io.ktor:ktor-server-tests")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation("io.ktor:ktor-server-auth")
+    implementation("io.ktor:ktor-server-auth-jwt")
+    implementation("at.favre.lib:bcrypt:0.9.0")
 }

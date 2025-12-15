@@ -6,6 +6,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.serialization.gson.*
 import app.routes.apiRoutes
+import app.routes.configureSecurity
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 
@@ -18,11 +19,13 @@ fun main() {
     }
     val dataSource = HikariDataSource(config)
 
+    initDatabase(dataSource)
 
     embeddedServer(Netty, port = 8080) {
         install(ContentNegotiation) {
             gson()
         }
+        configureSecurity()
         apiRoutes(dataSource)
     }.start(wait = true)
 }
