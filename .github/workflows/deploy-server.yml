@@ -26,7 +26,6 @@ jobs:
         run: |
           pwd
           ls
-          ls GardenHelperServer
 
       - name: Build Docker image
         shell: powershell
