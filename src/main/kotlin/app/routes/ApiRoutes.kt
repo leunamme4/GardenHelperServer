@@ -1,7 +1,9 @@
 package app.routes
 
 import app.dto.LoginRequest
+import app.dto.MessageResponse
 import app.dto.RegisterRequest
+import app.dto.TokenResponse
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.zaxxer.hikari.HikariDataSource
@@ -33,7 +35,7 @@ fun Application.apiRoutes(dataSource: HikariDataSource) {
             val req = call.receive<RegisterRequest>()
 
             if (req.password != req.confirmPassword) {
-                call.respond(HttpStatusCode.BadRequest, "Passwords do not match")
+                call.respond(HttpStatusCode.BadRequest, MessageResponse("Passwords do not match"))
                 return@post
             }
 
@@ -47,9 +49,9 @@ fun Application.apiRoutes(dataSource: HikariDataSource) {
                     stmt.setString(2, req.password)
                     stmt.executeUpdate()
 
-                    call.respond(HttpStatusCode.Created, "User registered successfully")
+                    call.respond(HttpStatusCode.Created, MessageResponse("User registered successfully"))
                 } catch (e: SQLException) {
-                    call.respond(HttpStatusCode.Conflict, "User with this email already exists")
+                    call.respond(HttpStatusCode.Conflict, MessageResponse("User with this email already exists"))
                 }
             }
         }
@@ -73,12 +75,12 @@ fun Application.apiRoutes(dataSource: HikariDataSource) {
                             .withClaim("email", req.email)
                             .sign(Algorithm.HMAC256("super-secret"))
 
-                        call.respond(mapOf("token" to token))
+                        call.respond(TokenResponse(token))
                     } else {
-                        call.respond(HttpStatusCode.Unauthorized, "Invalid email or password")
+                        call.respond(HttpStatusCode.Unauthorized, MessageResponse("Invalid email or password"))
                     }
                 } else {
-                    call.respond(HttpStatusCode.Unauthorized, "Invalid email or password")
+                    call.respond(HttpStatusCode.Unauthorized, MessageResponse("Invalid email or password"))
                 }
             }
         }
