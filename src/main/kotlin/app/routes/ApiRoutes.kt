@@ -42,6 +42,7 @@ fun Application.apiRoutes(dataSource: HikariDataSource) {
             val connection = dataSource.connection
             connection.use {
                 try {
+                    // hi there
                     val stmt = it.prepareStatement(
                         "INSERT INTO users (email, password) VALUES (?, ?)"
                     )
